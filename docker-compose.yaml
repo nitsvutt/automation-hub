@@ -1,0 +1,35 @@
+services:
+  hub-db:
+    image: postgres:15-alpine3.18
+    hostname: hub-db
+    ports:
+      - "5432:5432"
+    volumes:
+      - $COMMON_PATH/hub_db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=$HUB_USER
+      - POSTGRES_PASSWORD=$HUB_PASSWORD
+      - POSTGRES_DB=hub
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - PGPORT=$HUB_PORT
+    command:
+      - "postgres"
+      - "-c"
+      - "wal_level=logical"
+
+  hub:
+    image: nitsvutt/streamlit-python:3.10.4
+    hostname: hub
+    depends_on:
+      - hub-db
+    ports:
+      - "8903:8903"
+    environment:
+      - HUB_USER=$HUB_USER
+      - HUB_PASSWORD=$HUB_PASSWORD
+      - HUB_DB=hub
+      - HUB_SERVER=$HUB_SERVER
+      - HUB_PORT=HUB_PORT
+    volumes:
+      - ./app:/app
+    command: python -m streamlit run main.py --server.port 8903
