@@ -1,3 +1,24 @@
 import streamlit as st
 
-st.title('Automation Hub')
+from core.config import (
+    IMAGE_PATH
+)
+
+st.markdown("""
+    <h2 style='text-align:center'>
+        Automation Hub
+    </h2>
+    """, unsafe_allow_html=True)
+
+st.image(IMAGE_PATH+"background.gif", use_column_width=True)
+
+st.markdown("""
+    <h5 style='text-align:center'>
+        Automation Hub is a web-based platform to programmatically develop, operate and monitor data pipelines.
+    </h5>
+    """, unsafe_allow_html=True)
+
+col5 = st.columns(5)
+
+with col5[2]:
+    st.button("Getting started", type="primary")
