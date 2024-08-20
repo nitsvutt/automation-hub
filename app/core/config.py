@@ -1,16 +1,23 @@
 import os
 
-# postgresql connection
-HUB_SERVER = os.environ['HUB_SERVER']
-HUB_PORT = os.environ['HUB_PORT']
-HUB_USER = os.environ['HUB_USER']
-HUB_PASSWORD = os.environ['HUB_PASSWORD']
+class Environment():
+    def __init__(self):
+        self.TIMEZONE = 'Asia/Ho_Chi_Minh'
+        self.DATE_FORMAT = '%Y-%m-%d'
+        self.DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 
-# datetime format
-TIMEZONE = 'Asia/Ho_Chi_Minh'
-DATE_FORMAT = '%Y-%m-%d'
-DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'
+class DBConnection():
+    def __init__(self):
+        self.HUB_SERVER = os.environ['HUB_SERVER']
+        self.HUB_PORT = os.environ['HUB_PORT']
+        self.HUB_USER = os.environ['HUB_USER']
+        self.HUB_PASSWORD = os.environ['HUB_PASSWORD']
 
-# path
-PAGE_PATH = "./pages/"
-IMAGE_PATH = "./images/"
+class Path():
+    def __init__(self):
+        self.PAGE_PATH = "./pages/"
+        self.IMAGE_PATH = "./images/"
+
+env = Environment()
+dbconnection = DBConnection()
+path = Path()
