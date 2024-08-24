@@ -16,7 +16,9 @@ class DBConnection():
 class Path():
     def __init__(self):
         self.PAGE_PATH = "./pages/"
-        self.IMAGE_PATH = "./images/"
+        self.ASSET_PATH = "./assets/"
+        self.IMAGE_PATH = self.ASSET_PATH + "images/"
+        self.CSS_PATH = self.ASSET_PATH + "css/"
 
 env = Environment()
 dbconnection = DBConnection()

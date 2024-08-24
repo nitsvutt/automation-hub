@@ -1,7 +1,9 @@
 import streamlit as st
 
 from core.config import path
-from core.utils import page
+from core.utils import page, make_style
+
+make_style("style.css")
 
 st.markdown("""
     <h2 style='text-align:center'>

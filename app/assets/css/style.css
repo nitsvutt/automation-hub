@@ -1,0 +1,7 @@
+div.stButton > button:first-child {
+    border-color: #017cee;
+    background-color: #017cee;
+}
+div.stButton > button:hover {
+    opacity: 0.8;
+}

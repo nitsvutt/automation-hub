@@ -11,6 +11,11 @@ class Page():
         self.pipeline = st.Page(path.PAGE_PATH+"pipeline.py", title="Pipeline", icon=":material/water_pump:")
         self.documentation = st.Page(path.PAGE_PATH+"documentation.py", title="Documentation", icon=":material/description:")
 
+def make_style(css_file: str):
+    with open(path.CSS_PATH+css_file) as file:
+        css = file.read()
+        st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
+
 def current_sysdate():
     return datetime.now(pytz.timezone(env.TIMEZONE)).strftime(env.DATE_FORMAT)
 
