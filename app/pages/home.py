@@ -1,9 +1,7 @@
 import streamlit as st
 
 from core.config import path
-from core.utils import page, make_style
-
-make_style("style.css")
+from core.utils import page, use_style
 
 st.markdown("""
     <h2 style='text-align:center'>
@@ -20,7 +18,7 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 col5 = st.columns(5)
-
 with col5[2]:
+    use_style("botton.css")
     if st.button("Getting started", type='primary'):
         st.switch_page(page.documentation)
