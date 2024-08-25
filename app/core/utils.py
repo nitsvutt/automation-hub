@@ -11,9 +11,29 @@ class Page():
         self.pipeline = st.Page(path.PAGE_PATH + "pipeline.py", title="Pipeline", icon=":material/water_pump:")
         self.documentation = st.Page(path.PAGE_PATH + "documentation.py", title="Documentation", icon=":material/description:")
 
-def add_heading(text: str, tag: str, style: dict):
-    all_style = ';'.join([key + ':' + value for key, value in style.items()])
-    st.markdown(f"<{tag} style='{all_style}'> {text} </{tag}>", unsafe_allow_html=True)
+def add_tag(text: str, tag: str, additional: dict = {}, style: dict = {}):
+    heading_font_size = {
+        'h1': '220%',
+        'h2': '200%',
+        'h3': '180%',
+        'h4': '160%',
+        'h5': '140%',
+        'h6': '120%'
+    }
+    font_size = heading_font_size.get(tag, None)
+    if font_size:
+        style.update({"font-size": font_size})
+        style.update({"font-weight": "bold"})
+        tag = 'p'
+    if additional:
+        all_additional = ' '.join([key + '=' + value for key, value in additional.items()])
+    else:
+        all_additional = ""
+    if style:
+        all_style = "style='" + ';'.join([key + ':' + value for key, value in style.items()]) + "'"
+    else:
+        all_style = ""
+    st.markdown(f"<{tag} {all_additional} {all_style}> {text} </{tag}>", unsafe_allow_html=True)
 
 def use_style(css_file: str):
     with open(path.CSS_PATH + css_file) as file:
