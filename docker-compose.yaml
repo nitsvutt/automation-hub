@@ -17,19 +17,37 @@ services:
       - "-c"
       - "wal_level=logical"
 
-  hub:
-    image: nitsvutt/streamlit-python:3.10.4
-    hostname: hub
+  hub-be:
+    image: nitsvutt/fastapi-python:3.10.4
+    hostname: hub-be
     depends_on:
       - hub-db
     ports:
       - "8903:8903"
+    volumes:
+      - ./hub-be:/app
     environment:
       - HUB_USER=$HUB_USER
       - HUB_PASSWORD=$HUB_PASSWORD
       - HUB_DB=hub
       - HUB_SERVER=$HUB_SERVER
-      - HUB_PORT=HUB_PORT
+      - HUB_PORT=$HUB_PORT
+    command: uvicorn main:hub --host 0.0.0.0 --port 8903 --reload
+
+  hub-fe:
+    image: nitsvutt/streamlit-python:3.10.4
+    hostname: hub-fe
+    depends_on:
+      - hub-db
+      - hub-be
+    ports:
+      - "8904:8904"
+    environment:
+      - HUB_USER=$HUB_USER
+      - HUB_PASSWORD=$HUB_PASSWORD
+      - HUB_DB=hub
+      - HUB_SERVER=$HUB_SERVER
+      - HUB_PORT=$HUB_PORT
     volumes:
-      - ./app:/app
-    command: python -m streamlit run main.py --server.port 8903
+      - ./hub-fe:/app
+    command: python -m streamlit run main.py --server.port 8904
