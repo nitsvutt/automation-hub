@@ -3,18 +3,12 @@ import streamlit as st
 from core.config import path
 from core.utils import page, add_tag, use_style
 
-add_tag("Automation Hub", tag="h2", style={"text-align": "center"})
+add_tag("Automation Hub", tag="h1", style={"text-align": "center"})
 
 st.image(path.IMAGE_PATH+"background.gif", use_column_width=True)
 
 add_tag("Automation Hub is a web-based platform to programmatically develop, operate, and monitor data pipelines.",
             tag="p", style={"text-align": "center", "color": "grey", "font-size": "115%"})
-
-col = st.columns(5)
-with col[2]:
-    use_style("botton.css")
-    if st.button("Getting started", type='primary', use_container_width=True):
-        st.switch_page(page.documentation)
 
 add_tag("Principles", tag="h4", style={"text-align": "center"})
 
@@ -79,6 +73,12 @@ with text_col2[1]:
     add_tag("Easy to Use", tag="h6", style={"text-align": "center"})
     add_tag("Anyone with SQL knowledge can deploy a data pipeline.",
                 tag="p", style={"text-align": "center", "color": "grey"})
+
+col = st.columns(5)
+with col[2]:
+    use_style("botton.css")
+    if st.button("Getting started", type='primary', use_container_width=True):
+        st.switch_page(page.documentation)
 
 add_tag("Contact me", tag="h4", style={"text-align": "center"})
 
