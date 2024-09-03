@@ -1,25 +1,27 @@
+from dataclasses import dataclass
 import os
 
-class Environment():
-    def __init__(self):
-        self.TIMEZONE = 'Asia/Ho_Chi_Minh'
-        self.DATE_FORMAT = '%Y-%m-%d'
-        self.DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'
+@dataclass
+class DatetimeFormat:
+    TIMEZONE: str
+    DATE_FORMAT: str
+    DATETIME_FORMAT: str
 
-class DBConnection():
-    def __init__(self):
-        self.HUB_SERVER = os.environ['HUB_SERVER']
-        self.HUB_PORT = os.environ['HUB_PORT']
-        self.HUB_USER = os.environ['HUB_USER']
-        self.HUB_PASSWORD = os.environ['HUB_PASSWORD']
+@dataclass
+class Path:
+    PAGE_PATH: str
+    ASSET_PATH: str
+    @property
+    def IMAGE_PATH(self) -> str:
+        return self.ASSET_PATH + 'images/'
+    @property
+    def CSS_PATH(self) -> str:
+        return self.ASSET_PATH + 'css/'
 
-class Path():
-    def __init__(self):
-        self.PAGE_PATH = "./pages/"
-        self.ASSET_PATH = "./assets/"
-        self.IMAGE_PATH = self.ASSET_PATH + "images/"
-        self.CSS_PATH = self.ASSET_PATH + "css/"
+dt_format = DatetimeFormat(
+    TIMEZONE='Asia/Ho_Chi_Minh', DATE_FORMAT='%Y-%m-%d', DATETIME_FORMAT='%Y-%m-%d %H:%M:%S'
+)
 
-env = Environment()
-dbconnection = DBConnection()
-path = Path()
+path = Path(
+    PAGE_PATH = "./pages/", ASSET_PATH = "./assets/"
+)

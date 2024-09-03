@@ -2,7 +2,7 @@ import streamlit as st
 from datetime import datetime
 import pytz
 
-from core.config import env, path
+from core.config import dt_format, path
 
 class Page():
     def __init__(self):
@@ -41,9 +41,9 @@ def use_style(css_file: str):
         st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
 
 def current_sysdate():
-    return datetime.now(pytz.timezone(env.TIMEZONE)).strftime(env.DATE_FORMAT)
+    return datetime.now(pytz.timezone(dt_format.TIMEZONE)).strftime(dt_format.DATE_FORMAT)
 
 def current_systime():
-    return datetime.now(pytz.timezone(env.TIMEZONE)).strftime(env.DATETIME_FORMAT)
+    return datetime.now(pytz.timezone(dt_format.TIMEZONE)).strftime(dt_format.DATETIME_FORMAT)
 
 page = Page()
